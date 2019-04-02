@@ -8,8 +8,12 @@
 
 import UIKit
 
+/**
+ A class responsiblre for getting the taxis data
+ */
 class TaxisDataSource {
     
+    /// Stub data
     var taxisStub = [
         Taxi(currentStation:"Castle", logoImage:"AirportTaxi" ,ETA:5),
         Taxi(currentStation:"Shekem", logoImage:"JerusalemTaxi",ETA:6),
@@ -20,16 +24,25 @@ class TaxisDataSource {
     func getTaxi(_ index:Int) -> Taxi{
         return taxisStub[index]
     }
-    //Subscript that enables accessing our class with [], just like an array
+    
+    /**
+     Subscript that enables accessing our class with [], just like an array
+     */
     subscript(index: Int) -> Taxi {
         return taxisStub[index]
     }
-    
     
     func getCount() -> Int {
         return taxisStub.count
     }
     
+    /**
+     Reload the data - for the assigment, it's just get if from the local array
+     and changing the ETA
+     it could be DB or network and that way does not affect the TaxisListViewController functionality
+     
+     - parameter completion block : return true if data fetched ok
+     */
     func reloadData( completion: (_ result: Bool)->()) {
         var randomInt = Int.random(in: 0..<30)
         taxisStub[0].ETA = randomInt
@@ -42,15 +55,9 @@ class TaxisDataSource {
         
         completion(true)
     }
-    /**
-     Called for every 'annotation' (marker) before it is
-     about to be rendered on the screen.
-     
-     - returns: the view representing the marker
-     */
+    
     func getTaxis() -> [Taxi]? {
-        
-        return taxisStub ;
+        return taxisStub
     }
 
 }

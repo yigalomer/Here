@@ -15,8 +15,11 @@ class TaxisListViewController: UIViewController,UITableViewDataSource {
     let taxisDataSource: TaxisDataSource = TaxisDataSource()
     var refreshTimer: Timer!
 
+    // MARK: - View lifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        /// Start a timer which will invoke refreshTable() after 5 seconds and will be repeted
         self.refreshTimer = Timer.scheduledTimer(timeInterval: TimeInterval(Constants.refreshRateInMinutes),
                                                  target: self,
                                                  selector: #selector(refreshTable),
@@ -25,6 +28,10 @@ class TaxisListViewController: UIViewController,UITableViewDataSource {
     }
    
 
+    /**
+     Reload the data from the data source. if it went OK, we'll get a CB with result=true
+     we can then reload the data into our table view
+     */
     @objc func refreshTable() {
         taxisDataSource.reloadData() { (result) -> () in
             if (result) {
@@ -41,10 +48,10 @@ class TaxisListViewController: UIViewController,UITableViewDataSource {
         // Create a new cell with the reuse identifier of our prototype cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "taxiCell") as! TaxiTableViewCell
      
-        // get the taxi model from our data source according to the index
+        // get the taxi model from our data source for an index
         let taxi:Taxi = taxisDataSource[indexPath.row]
         
-        // fill the cell with the model values
+        // populate the cell with the model values
         cell.taxiLogoImage.image = UIImage(named: taxi.logoImage)
         cell.station.text = taxi.currentStation
         cell.ETA.text = "\(taxi.ETA)m"
