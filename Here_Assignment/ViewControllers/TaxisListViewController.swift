@@ -17,8 +17,7 @@ class TaxisListViewController: UIViewController,UITableViewDataSource {
     // MARK: - View lifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //self.tableView.tableHeaderView = 'your_value' ;
+
         /// Start a timer which will invoke refreshTable() after 5 seconds and will be repeted
         self.refreshTimer = Timer.scheduledTimer(timeInterval:TimeInterval(Constants.refreshRateInSeconds),
                                                  target: self,
@@ -26,31 +25,6 @@ class TaxisListViewController: UIViewController,UITableViewDataSource {
                                                  userInfo: nil,
                                                  repeats: true)
     }
-    
-//    
-//    private func tableView (tableView:UITableView,  viewForHeaderInSection section:Int)->UIView
-//    {
-//        
-//        var title = tableView.titleForHeaderInSection[section] as String
-//        if (title == "") {
-//            return UIView(frame:CGRectZero);
-//        }
-//        var headerView:UIView! = UIView (frame:CGRectMake(0, 0, self.tableView.frame.size.width, 20.0));
-//        headerView.backgroundColor = self.view.backgroundColor;
-//        
-//        return headerView;
-//    }
-
-//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        return "Section \(section)"
-//    }
-    
-//    private func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        let vw = UIView()
-//        vw.backgroundColor = UIColor.gray
-//
-//        return vw
-//    }
 
     // MARK: - refresh data
     /**
@@ -60,7 +34,7 @@ class TaxisListViewController: UIViewController,UITableViewDataSource {
     @objc func refreshTable() {
         taxisDataSource.reloadData() { (result) -> () in
             if (result) {
-                // Reload the table view after data source was reloaded
+                /// Reload the table view after data source was reloaded
                 tableView.reloadData()
             }
         }
@@ -70,18 +44,23 @@ class TaxisListViewController: UIViewController,UITableViewDataSource {
     // MARK: - Table view data source
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // Create a new cell with the reuse identifier of our prototype cell
+        /// Create a new cell with the reuse identifier of our prototype cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "taxiCell") as! TaxiTableViewCell
      
-        // get the taxi model from our data source for an index
+        /// get the taxi model from our data source for an index
         let taxi:Taxi = taxisDataSource[indexPath.row]
         
-        // populate the cell with the model values
+        /// populate the cell with the model values
         cell.taxiLogoImage.image = UIImage(named: taxi.logoImage)
         cell.station.text = taxi.currentStation
-        cell.ETA.text = "\(taxi.ETA)m"
+        if (taxi.ETA != 0){
+            cell.ETA.text = "\(taxi.ETA)m"
+        }
+        else{
+            cell.ETA.text = Constants.now
+        }
         
-        // Return our new cell for display
+        /// Return our new cell for display
         return cell
     }
     
