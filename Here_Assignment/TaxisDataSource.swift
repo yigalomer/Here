@@ -9,7 +9,7 @@
 import UIKit
 
 /**
- A class responsiblre for getting the taxis data
+ A class responsiblre for getting the taxis data (could be from a DB or network)
  */
 class TaxisDataSource {
     
@@ -56,8 +56,8 @@ class TaxisDataSource {
         completion(true)
     }
     
-    func getTaxis() -> [Taxi]? {
-        return taxisStub
-    }
+//    func getTaxis() -> [Taxi]? {
+//        return taxisStub
+//    }
 
 }

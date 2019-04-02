@@ -10,7 +10,6 @@ import UIKit
 
 class TaxisListViewController: UIViewController,UITableViewDataSource {
     
-    
     @IBOutlet weak var tableView: UITableView!
     let taxisDataSource: TaxisDataSource = TaxisDataSource()
     var refreshTimer: Timer!
@@ -19,15 +18,41 @@ class TaxisListViewController: UIViewController,UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //self.tableView.tableHeaderView = 'your_value' ;
         /// Start a timer which will invoke refreshTable() after 5 seconds and will be repeted
-        self.refreshTimer = Timer.scheduledTimer(timeInterval: TimeInterval(Constants.refreshRateInMinutes),
+        self.refreshTimer = Timer.scheduledTimer(timeInterval:TimeInterval(Constants.refreshRateInSeconds),
                                                  target: self,
                                                  selector: #selector(refreshTable),
                                                  userInfo: nil,
                                                  repeats: true)
     }
-   
+    
+//    
+//    private func tableView (tableView:UITableView,  viewForHeaderInSection section:Int)->UIView
+//    {
+//        
+//        var title = tableView.titleForHeaderInSection[section] as String
+//        if (title == "") {
+//            return UIView(frame:CGRectZero);
+//        }
+//        var headerView:UIView! = UIView (frame:CGRectMake(0, 0, self.tableView.frame.size.width, 20.0));
+//        headerView.backgroundColor = self.view.backgroundColor;
+//        
+//        return headerView;
+//    }
 
+//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        return "Section \(section)"
+//    }
+    
+//    private func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        let vw = UIView()
+//        vw.backgroundColor = UIColor.gray
+//
+//        return vw
+//    }
+
+    // MARK: - refresh data
     /**
      Reload the data from the data source. if it went OK, we'll get a CB with result=true
      we can then reload the data into our table view
@@ -65,11 +90,10 @@ class TaxisListViewController: UIViewController,UITableViewDataSource {
         return taxisDataSource.getCount()
     }
     
+    // perform the deinitialization
+    deinit {
+        refreshTimer.invalidate()
+    }
 
-    
-
-
-    //refreshTimer.invalidate() TODO TODO
-  
 }
 

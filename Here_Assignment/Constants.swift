@@ -10,5 +10,5 @@ import UIKit
 
 struct Constants {
 
-    static let refreshRateInMinutes = 5
+    static let refreshRateInSeconds = 5
 }

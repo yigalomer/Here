@@ -67,7 +67,6 @@
 		9F42B00C2253750300B55925 = {
 			isa = PBXGroup;
 			children = (
-				9F42B038225380CE00B55925 /* Model */,
 				9F42B0172253750300B55925 /* Here_Assignment */,
 				9F42B02C2253750500B55925 /* Here_AssignmentTests */,
 				9F42B0162253750300B55925 /* Products */,
@@ -87,14 +86,15 @@
 			isa = PBXGroup;
 			children = (
 				9F42B0182253750300B55925 /* AppDelegate.swift */,
-				9F42B01A2253750300B55925 /* TaxisListViewController.swift */,
+				9F42B0412253E4C600B55925 /* ViewControllers */,
+				9F42B038225380CE00B55925 /* Model */,
 				9F42B03D2253A57300B55925 /* TaxiTableViewCell.swift */,
+				9F42B03B22538B0300B55925 /* TaxisDataSource.swift */,
+				9F42B03F2253BDB200B55925 /* Constants.swift */,
 				9F42B01C2253750300B55925 /* Main.storyboard */,
 				9F42B01F2253750500B55925 /* Assets.xcassets */,
 				9F42B0212253750500B55925 /* LaunchScreen.storyboard */,
 				9F42B0242253750500B55925 /* Info.plist */,
-				9F42B03B22538B0300B55925 /* TaxisDataSource.swift */,
-				9F42B03F2253BDB200B55925 /* Constants.swift */,
 			);
 			path = Here_Assignment;
 			sourceTree = "<group>";
@@ -114,6 +114,14 @@
 				9F42B0392253864F00B55925 /* Taxi.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		9F42B0412253E4C600B55925 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				9F42B01A2253750300B55925 /* TaxisListViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
