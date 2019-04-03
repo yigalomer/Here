@@ -55,6 +55,7 @@ class TaxisDataSource {
                 taxisStub[index].ETA = randomInt
             }
          }
+        taxisStub = taxisStub.sorted(by: { $0.ETA < $1.ETA })
         completion(true)
     }
 
