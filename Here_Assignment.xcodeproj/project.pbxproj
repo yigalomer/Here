@@ -14,9 +14,10 @@
 		9F42B0232253750500B55925 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F42B0212253750500B55925 /* LaunchScreen.storyboard */; };
 		9F42B02E2253750500B55925 /* Here_AssignmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F42B02D2253750500B55925 /* Here_AssignmentTests.swift */; };
 		9F42B03A2253864F00B55925 /* Taxi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F42B0392253864F00B55925 /* Taxi.swift */; };
-		9F42B03C22538B0300B55925 /* TaxisDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F42B03B22538B0300B55925 /* TaxisDataSource.swift */; };
+		9F42B03C22538B0300B55925 /* TaxisViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F42B03B22538B0300B55925 /* TaxisViewModel.swift */; };
 		9F42B03E2253A57300B55925 /* TaxiTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F42B03D2253A57300B55925 /* TaxiTableViewCell.swift */; };
 		9F42B0402253BDB200B55925 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F42B03F2253BDB200B55925 /* Constants.swift */; };
+		9F42B0482254C34700B55925 /* LoadingIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F42B0472254C34700B55925 /* LoadingIndicatorView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,9 +42,10 @@
 		9F42B02D2253750500B55925 /* Here_AssignmentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Here_AssignmentTests.swift; sourceTree = "<group>"; };
 		9F42B02F2253750500B55925 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9F42B0392253864F00B55925 /* Taxi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Taxi.swift; sourceTree = "<group>"; };
-		9F42B03B22538B0300B55925 /* TaxisDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxisDataSource.swift; sourceTree = "<group>"; };
+		9F42B03B22538B0300B55925 /* TaxisViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxisViewModel.swift; sourceTree = "<group>"; };
 		9F42B03D2253A57300B55925 /* TaxiTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaxiTableViewCell.swift; sourceTree = "<group>"; };
 		9F42B03F2253BDB200B55925 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		9F42B0472254C34700B55925 /* LoadingIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicatorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,8 +90,9 @@
 				9F42B0182253750300B55925 /* AppDelegate.swift */,
 				9F42B0412253E4C600B55925 /* ViewControllers */,
 				9F42B038225380CE00B55925 /* Model */,
-				9F42B03D2253A57300B55925 /* TaxiTableViewCell.swift */,
-				9F42B03B22538B0300B55925 /* TaxisDataSource.swift */,
+				9F42B0492255C49E00B55925 /* ViewModel */,
+				9F42B04A2255C4C000B55925 /* Views */,
+				9F42B0442254B7E700B55925 /* Utils */,
 				9F42B03F2253BDB200B55925 /* Constants.swift */,
 				9F42B01C2253750300B55925 /* Main.storyboard */,
 				9F42B01F2253750500B55925 /* Assets.xcassets */,
@@ -122,6 +125,30 @@
 				9F42B01A2253750300B55925 /* TaxisListViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		9F42B0442254B7E700B55925 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				9F42B0472254C34700B55925 /* LoadingIndicatorView.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		9F42B0492255C49E00B55925 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				9F42B03B22538B0300B55925 /* TaxisViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		9F42B04A2255C4C000B55925 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9F42B03D2253A57300B55925 /* TaxiTableViewCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -226,8 +253,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				9F42B03E2253A57300B55925 /* TaxiTableViewCell.swift in Sources */,
-				9F42B03C22538B0300B55925 /* TaxisDataSource.swift in Sources */,
+				9F42B03C22538B0300B55925 /* TaxisViewModel.swift in Sources */,
 				9F42B01B2253750300B55925 /* TaxisListViewController.swift in Sources */,
+				9F42B0482254C34700B55925 /* LoadingIndicatorView.swift in Sources */,
 				9F42B03A2253864F00B55925 /* Taxi.swift in Sources */,
 				9F42B0192253750300B55925 /* AppDelegate.swift in Sources */,
 				9F42B0402253BDB200B55925 /* Constants.swift in Sources */,

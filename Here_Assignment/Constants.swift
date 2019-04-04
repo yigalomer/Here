@@ -12,4 +12,7 @@ struct Constants {
 
     static let refreshRateInSeconds = 5
     static let now = "Now"
+    static let loadingTitle = "Loading..."
+    static let defaultLogoName = "defTaxi"
+    
 }
