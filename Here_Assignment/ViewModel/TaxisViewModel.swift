@@ -10,7 +10,7 @@ import UIKit
 
 protocol TaxisDataSourceDelegate : class {
     
-    func didDataWasLoaded(data:[Taxi])
+    func didDataWasLoaded()
 }
 /**
  The class functions as a ViewModel. Decoupled from the vc, it contains the business logic related to the UI.
@@ -31,16 +31,16 @@ class TaxisViewModel: NSObject {
         super.init()
         
         self.taxisStub = [
-            Taxi(currentStation:"Airport Taxis", logoImage:"AirportTaxi" ,ETA:34),
-            Taxi(currentStation:"Jerusalem Taxis", logoImage:"JerusalemTaxi",ETA:29),
-            Taxi(currentStation:"Ayalon Taxis", logoImage:"AyalonTaxi",ETA:35),
-            Taxi(currentStation:"Zvi Taxis", logoImage:"ZviTaxi",ETA:25),
-            Taxi(currentStation:"Shekem Taxis", logoImage:"ShekemTaxi",ETA:22),
-            Taxi(currentStation:"Yahav Taxis", logoImage:"YahavTaxi",ETA:27),
-            Taxi(currentStation:"Nizan Taxis", logoImage:"NizanTaxi",ETA:18),
-            Taxi(currentStation:"Rishon Taxis", logoImage:"RishonTaxi",ETA:11),
-            Taxi(currentStation:"BeerYaakov Taxis", logoImage:"BeerYaakovTaxi",ETA:32),
-            Taxi(currentStation:"Shimshon Taxis", logoImage:"ShimshonTaxi",ETA:15),
+            Taxi(stationName:"Airport Taxis", stationLogoImage:"AirportTaxi" ,ETA:34),
+            Taxi(stationName:"Jerusalem Taxis", stationLogoImage:"JerusalemTaxi",ETA:29),
+            Taxi(stationName:"Ayalon Taxis", stationLogoImage:"AyalonTaxi",ETA:35),
+            Taxi(stationName:"Zvi Taxis", stationLogoImage:"ZviTaxi",ETA:25),
+            Taxi(stationName:"Shekem Taxis", stationLogoImage:"ShekemTaxi",ETA:22),
+            Taxi(stationName:"Yahav Taxis", stationLogoImage:"YahavTaxi",ETA:27),
+            Taxi(stationName:"Nizan Taxis", stationLogoImage:"NizanTaxi",ETA:18),
+            Taxi(stationName:"Rishon Taxis", stationLogoImage:"RishonTaxi",ETA:11),
+            Taxi(stationName:"BeerYaakov Taxis", stationLogoImage:"BeerYaakovTaxi",ETA:32),
+            Taxi(stationName:"Shimshon Taxis", stationLogoImage:"ShimshonTaxi",ETA:15),
             ]
         
         /// Start a timer which will invoke reloadData() after 5 seconds and will be repeated every 5 seconds
@@ -80,9 +80,8 @@ class TaxisViewModel: NSObject {
             self.taxisStub = (self.taxisStub?.sorted(by: { $0.ETA < $1.ETA }))
             
             /// Notifies the VC that new data was received
-            if let taxisStub = self.taxisStub {
-                self.delegate?.didDataWasLoaded(data:taxisStub)
-            }
+            self.delegate?.didDataWasLoaded()
+
             
             /// If all Taxi item's ETA reached 0, there's no point to keep on with the timer
             if (self.isAllTaxiIemsETAAreZero()){
@@ -116,6 +115,18 @@ class TaxisViewModel: NSObject {
         return taxisStub![index]
     }
 
+    func getStationName(index: Int) -> String {
+        return taxisStub![index].stationName
+    }
+    
+    func getStationLogo(index: Int) -> UIImage {
+        let  taxiStationlogoImageName : String = taxisStub![index].stationLogoImage
+        return  UIImage(named:taxiStationlogoImageName)!
+     }
+    func getTaxiETA(index: Int) -> Int {
+        return taxisStub![index].ETA
+    }
+    
     /**
      - returns: a Taxis count
      */

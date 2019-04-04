@@ -10,7 +10,7 @@ import UIKit
 
 struct Taxi {
     
-    var  currentStation : String
-    var  logoImage : String
+    var  stationName : String
+    var  stationLogoImage : String
     var  ETA : Int
 }

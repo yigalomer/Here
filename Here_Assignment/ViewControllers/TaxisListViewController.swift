@@ -11,18 +11,17 @@ import UIKit
 class TaxisListViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,  TaxisDataSourceDelegate{
   
     @IBOutlet weak var tableView: UITableView!
-    let taxisDataSource: TaxisViewModel = TaxisViewModel()
+    let taxisViewModel: TaxisViewModel = TaxisViewModel()
     /// hide/show the cells of the table view. We'll show the cells only after fetching it from the data source
     var isDataLoaded = false
-    /// Local data source for the table view. Will be received from the data source
-    var taxisData : [Taxi]?
+ 
     var countReload = 1 // for debug usage only 
     
     // MARK: - View Controller lifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        taxisDataSource.delegate = self
+        taxisViewModel.delegate = self
         /// Show a loading indicator
         LoadingIndicatorView.show(tableView,loadingText: Constants.loadingTitle)
         self.tableView.rowHeight = 100.0
@@ -34,12 +33,10 @@ class TaxisListViewController: UIViewController,UITableViewDataSource,UITableVie
      in which, we update our table view data source (self.taxisData) and reload the table data
      - parameter array of Taxis : that was fetched by the View Model
      */
-    func didDataWasLoaded(data:[Taxi]) {
+    func didDataWasLoaded() {
         
         print ("didDataWasLoaded \(countReload)")
         countReload += 1
-        /// save the data that was received from the data source locally. It will be used as the data for the table view
-        self.taxisData = data
         
         DispatchQueue.main.async {
             self.tableView.reloadData()
@@ -51,7 +48,7 @@ class TaxisListViewController: UIViewController,UITableViewDataSource,UITableVie
             }
             self.isDataLoaded = true
             
-            UIView.transition(with: self.tableView, duration: 1.5, options: animationOption, animations: {self.self.tableView.reloadData()}, completion: nil)
+            UIView.transition(with: self.tableView, duration: 1.5, options: animationOption, animations: {self.tableView.reloadData()}, completion: nil)
             
             if ( LoadingIndicatorView.isAnimating()){
                 LoadingIndicatorView.hide()
@@ -65,14 +62,12 @@ class TaxisListViewController: UIViewController,UITableViewDataSource,UITableVie
         /// Create a new cell with the reuse identifier of our prototype cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "taxiCell") as! TaxiTableViewCell
      
-        /// get the taxi model from our data for a specific index
-        let taxi:Taxi? = (self.taxisData?[indexPath.row])
-        
         /// populate the cell with the model values
-        cell.taxiLogoImage.image = UIImage(named: (taxi?.logoImage ?? Constants.defaultLogoName))
-        cell.station.text = taxi?.currentStation
-        cell.ETA.text = ((taxi?.ETA)! > 0) ? "\(taxi!.ETA)m" : Constants.now
-
+        cell.taxiLogoImage.image = taxisViewModel.getStationLogo(index:indexPath.row)
+        cell.station.text = taxisViewModel.getStationName(index:indexPath.row)
+        let taxiETA = taxisViewModel.getTaxiETA(index:indexPath.row)
+        cell.ETA.text = (taxiETA > 0) ? "\(taxiETA)m" : Constants.now
+        
         /// Return our new cell for display
         return cell
     }
@@ -81,7 +76,7 @@ class TaxisListViewController: UIViewController,UITableViewDataSource,UITableVie
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         /// Do not show the table cell, not untill data was received from the data source
         if(self.isDataLoaded){
-            return taxisDataSource.getCount()
+            return taxisViewModel.getCount()
         }
         else{
             return 0
